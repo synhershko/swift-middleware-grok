@@ -45,7 +45,7 @@ class GrokMiddleware(object):
         pattern = req.headers.get('grok-pattern')
         if not pattern:
             self.logger.debug('Object found, but no pattern requested, aborting')
-            return get_err_response('Grok pattern is missing')(env, start_response)
+            return self.get_err_response('Grok pattern is missing')(env, start_response)
 
         self.logger.debug('Starting grok operation')
 
