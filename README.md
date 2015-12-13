@@ -45,3 +45,17 @@ Error downloading test: md5sum != etag, a2b0bd1d6a929129dd67d67f6ebd414f != 70c1
 ```
 
 The md5sum error is expected, as the file downloaded is a projection of the file being stored on Swift.
+
+## Analysing own logs
+
+A typical line from a Swift log looks something like this:
+
+```
+Dec 12 23:35:48 vagrant-ubuntu-trusty-64 proxy-server: 127.0.0.1 127.0.0.1 12/Dec/2015/23/35/48 GET /v1/AUTH_test/sample-log/sample-log HTTP/1.0 200 - python-swiftclient-2.6.1.dev26 AUTH_tk262ff273b... - 71 - tx6398b237474f4a69a9a37-00566caf54 - 0.0057 - - 1449963348.351684093 1449963348.357352018 0
+```
+
+The following grok pattern is going to extract the important bits:
+
+```
+%{SYSLOGTIMESTAMP:date} %{HOSTNAME:client} %{SYSLOGPROG:program} %{HOSTNAME} %{HOSTNAME} %{NOTSPACE} %{WORD:verb} %{NOTSPACE:request} (?: HTTP/%{NUMBER:httpversion})?|%{DATA:rawrequest}) %{NUMBER:response} - %{QS:agent} %{NOTSPACE} - %{NUMBER:client_etag} - %{NOTSPACE:transaction_id} - {NUMBER} - - {NUMBER:request_start_time} {NUMBER:request_end_time} {NUMBER:policy_index}
+```
