@@ -59,3 +59,9 @@ The following grok pattern is going to extract the important bits:
 ```
 %{SYSLOGTIMESTAMP:date} %{HOSTNAME:client} %{SYSLOGPROG:program} %{HOSTNAME} %{HOSTNAME} %{NOTSPACE} %{WORD:verb} %{NOTSPACE:request} (?: HTTP/%{NUMBER:httpversion})?|%{DATA:rawrequest}) %{NUMBER:response} - %{QS:agent} %{NOTSPACE} - %{NUMBER:client_etag} - %{NOTSPACE:transaction_id} - {NUMBER} - - {NUMBER:request_start_time} {NUMBER:request_end_time} {NUMBER:policy_index}
 ```
+
+## Acknowledgments
+
+Dr. Yaron Weinsberg from IBM Haifa Research Lab and Prof. Danny Dolev from the Hebrew University in Jerusalem for the idea and motivation. This middleware is being used in various projects for filtering and analysing client data.
+
+John Dickinson, Director of Technology at SwiftStack and Project Technical Lead for OpenStack Object Storage (Swift), for providing helpful guidance.
