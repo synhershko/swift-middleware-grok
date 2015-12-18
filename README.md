@@ -57,7 +57,7 @@ Dec 12 23:35:48 vagrant-ubuntu-trusty-64 proxy-server: 127.0.0.1 127.0.0.1 12/De
 The following grok pattern is going to extract the important bits:
 
 ```
-%{SYSLOGTIMESTAMP:date} %{HOSTNAME:client} %{SYSLOGPROG:program} %{HOSTNAME} %{HOSTNAME} %{NOTSPACE} %{WORD:verb} %{NOTSPACE:request} (?: HTTP/%{NUMBER:httpversion})?|%{DATA:rawrequest}) %{NUMBER:response} - %{QS:agent} %{NOTSPACE} - %{NUMBER:client_etag} - %{NOTSPACE:transaction_id} - {NUMBER} - - {NUMBER:request_start_time} {NUMBER:request_end_time} {NUMBER:policy_index}
+%{SYSLOGTIMESTAMP:date} %{HOSTNAME:client} %{SYSLOGPROG:program}: %{HOSTNAME} %{HOSTNAME} %{NOTSPACE} %{WORD:verb} %{NOTSPACE:request} HTTP/%{NUMBER:httpversion} %{NUMBER:response} - %{NOTSPACE:agent} %{NOTSPACE} - %{NUMBER:client_etag} - %{NOTSPACE:transaction_id} - %{NUMBER} - - %{NUMBER:request_start_time} %{NUMBER:request_end_time} %{NUMBER:policy_index}
 ```
 
 ## Acknowledgments
