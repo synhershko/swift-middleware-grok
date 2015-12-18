@@ -19,7 +19,7 @@ This is mostly useful for semantially reading log files that are stored on Swift
 use = egg:grok#grok
 
 [pipeline:main]
-pipeline = catch_errors healthcheck proxy-logging cache container_sync bulk tempurl tempauth slo dlo staticweb proxy-logging grok proxy-server
+pipeline = catch_errors healthcheck proxy-logging cache grok container_sync bulk tempurl tempauth slo dlo staticweb proxy-logging  proxy-server
 ```
 
 The relevant config files are in `/etc/swift/proxy-server/proxy-server.conf.d/20_settings.conf` or `/etc/swift/proxy-server.conf`, depending on your installation.
